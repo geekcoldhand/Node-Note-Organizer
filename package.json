@@ -1,14 +1,22 @@
 {
   "name": "note-taker",
   "version": "1.0.0",
-  "description": "",
+  "description": "Built the back end, connected the two, and then deploy the entire application on Heroku.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Horatious Harris",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geekcoldhand/Node-Note-Organizer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/geekcoldhand/Node-Note-Organizer/issues"
+  },
+  "homepage": "https://github.com/geekcoldhand/Node-Note-Organizer#readme"
 }
