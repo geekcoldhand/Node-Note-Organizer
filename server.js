@@ -3,7 +3,7 @@ const path = require("path");
 const api = require("./routes/index");
 
 const app = express();
-const PORT = process.env.port || 5502;
+const PORT = process.env.PORT || 5502;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
