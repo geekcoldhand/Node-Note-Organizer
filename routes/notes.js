@@ -1,5 +1,5 @@
 const notes = require("express").Router();
-const { v4: uuidv4 } = require("uuidv4");
+const { uuid } = require("uuidv4");
 const {
   readFromFile,
   readAndAppend,
@@ -12,8 +12,26 @@ notes.get("/", (req, res) => {
   readFromFile("./db/db.json").then((data) => res.json(JSON.parse(data)));
 });
 
+notes.delete("*", (req, res) => {
+  const noteId = req.query;
+  readFromFile("./db/db.json")
+    .then((data) => JSON.parse(data))
+    .then((jsonData) => {
+      const result = jsonData.filter((note) => {
+        !note.note_id === noteId;
+      });
+
+      if (result) {
+        writeToFile("./db/db.json", result);
+        res.json(result);
+      } else {
+        res.json("no note with that id . . . ");
+      }
+    });
+});
+
 // get a specific note based on the param id
-notes.get("/note_id", (req, res) => {
+notes.get("/:note_id", (req, res) => {
   const noteId = req.params.note_id;
   readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
@@ -35,10 +53,11 @@ notes.post("/", (req, res) => {
     const newNote = {
       title,
       text,
-      note_id: uuidv4,
+      note_id: uuid(),
     };
     readAndAppend(newNote, "./db/db.json");
-    res.json("added****: ", newNote);
+    res.json(newNote);
+    console.log("added****: ", newNote);
   }
 });
 
